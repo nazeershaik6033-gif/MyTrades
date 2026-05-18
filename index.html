@@ -3386,14 +3386,6 @@ function confirmTradebookImport() {
 // ── Header icon functions ──────────────────────────────────────────────────
 function toggleTheme() {
   setTheme(state.theme === 'dark' ? 'light' : 'dark');
-  const icon = document.getElementById('hdr-theme-icon');
-  if (icon) {
-    if (state.theme === 'dark') {
-      icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-    } else {
-      icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-    }
-  }
 }
 
 function openQuoteModal() {
@@ -3438,87 +3430,91 @@ function openQuoteModal() {
   const dayIdx = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000) % quotes.length;
   const q = quotes[dayIdx];
   showModal(
-    '<div class="modal-title" style="color:var(--cal);font-size:11px;letter-spacing:.16em;margin-bottom:14px">💬 DAILY QUOTE</div>'+
-    '<div style="background:var(--pbg);border:1px solid var(--border);border-radius:9px;padding:18px;margin-bottom:14px">'+
-      '<div style="font-size:13px;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:12px">"'+esc(q.q)+'"</div>'+
-      '<div style="font-size:10px;letter-spacing:.14em;color:var(--live);font-weight:700">— '+esc(q.a)+'</div>'+
-    '</div>'+
+    '<div class="modal-title" style="color:var(--cal);font-size:11px;letter-spacing:.16em;margin-bottom:14px">💬 DAILY QUOTE</div>' +
+    '<div style="background:var(--pbg);border:1px solid var(--border);border-radius:9px;padding:18px;margin-bottom:14px">' +
+      '<div style="font-size:13px;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:12px">“' + esc(q.q) + '”</div>' +
+      '<div style="font-size:10px;letter-spacing:.14em;color:var(--live);font-weight:700">— ' + esc(q.a) + '</div>' +
+    '</div>' +
     '<div class="modal-actions"><button class="btn-act btn-cancel" onclick="closeModal()">CLOSE</button></div>'
   );
 }
 
 function openGlobalSearch() {
   showModal(
-    '<div class="modal-title" style="color:var(--text);font-size:11px;letter-spacing:.16em;margin-bottom:12px">🔍 GLOBAL SEARCH</div>'+
-    '<input class="field-input" id="gs-input" type="text" placeholder="Search trades, portfolio, watchlist, priority..." oninput="runGlobalSearch()" style="margin-bottom:12px;--focus-c:var(--text)" autofocus>'+
-    '<div id="gs-results" style="max-height:55vh;overflow-y:auto"></div>'+
+    '<div class="modal-title" style="color:var(--text);font-size:11px;letter-spacing:.16em;margin-bottom:12px">🔍 GLOBAL SEARCH</div>' +
+    '<input class="field-input" id="gs-input" type="text" placeholder="Search trades, portfolio, watchlist, priority..." oninput="runGlobalSearch()" style="margin-bottom:12px;--focus-c:var(--text)">' +
+    '<div id="gs-results" style="max-height:55vh;overflow-y:auto"></div>' +
     '<div class="modal-actions"><button class="btn-act btn-cancel" onclick="closeModal()">CLOSE</button></div>'
   );
-  setTimeout(() => { const el = document.getElementById('gs-input'); if (el) el.focus(); }, 80);
+  setTimeout(function() { var el = document.getElementById('gs-input'); if (el) el.focus(); }, 80);
 }
 
 function runGlobalSearch() {
-  const q = (document.getElementById('gs-input')?.value || '').trim().toLowerCase();
-  const out = document.getElementById('gs-results');
-  if (!out) return;
-  if (!q) { out.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted2);font-size:10px;letter-spacing:.1em">TYPE TO SEARCH</div>'; return; }
+  var inp = document.getElementById('gs-input');
+  var out = document.getElementById('gs-results');
+  if (!inp || !out) return;
+  var q = inp.value.trim().toLowerCase();
+  if (!q) {
+    out.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted2);font-size:10px;letter-spacing:.1em">TYPE TO SEARCH</div>';
+    return;
+  }
 
-  const results = [];
+  var results = [];
+  var allCats = ['stocks','futures','options'];
 
-  // Search closed trades
-  const allCats = ['stocks','futures','options'];
-  allCats.forEach(cat => {
-    (state.trades.closed[cat] || []).forEach(t => {
+  allCats.forEach(function(cat) {
+    (state.trades.closed[cat] || []).forEach(function(t) {
       if ((t.symbol||'').toLowerCase().includes(q)) {
-        results.push({section:'TRADES (CLOSED)', label: esc(t.symbol), sub: esc(cat.toUpperCase()) + (t.after?.pl!=null?' · '+fmtPL(t.after.pl):''), action: ()=>{ closeModal(); switchTab('entry'); setTimeout(()=>{ activeSatelliteTab='closed'; renderTab(); },80); }});
+        var sym = t.symbol, pl = (t.after && t.after.pl != null) ? fmtPL(t.after.pl) : '';
+        results.push({section:'TRADES (CLOSED)', label: esc(sym), sub: cat.toUpperCase() + (pl ? ' · ' + pl : ''), tab:'entry'});
       }
     });
-    (state.trades.live[cat] || []).forEach(t => {
+    (state.trades.live[cat] || []).forEach(function(t) {
       if ((t.symbol||'').toLowerCase().includes(q)) {
-        results.push({section:'TRADES (LIVE)', label: esc(t.symbol), sub: esc(cat.toUpperCase()), action: ()=>{ closeModal(); switchTab('entry'); }});
+        results.push({section:'TRADES (LIVE)', label: esc(t.symbol), sub: cat.toUpperCase(), tab:'entry'});
       }
     });
   });
 
-  // Search portfolio
-  (state.portfolio || []).forEach(h => {
+  (state.portfolio || []).forEach(function(h) {
     if ((h.symbol||'').toLowerCase().includes(q)) {
-      results.push({section:'PORTFOLIO', label: esc(h.symbol), sub: (h.qty||'') + ' shares', action: ()=>{ closeModal(); switchTab('summary'); }});
+      results.push({section:'PORTFOLIO', label: esc(h.symbol), sub: (h.qty||'') + ' shares', tab:'summary'});
     }
   });
 
-  // Search watchlists
-  (state.watchlists || []).forEach(wl => {
-    (wl.items || []).forEach(it => {
+  (state.watchlists || []).forEach(function(wl) {
+    (wl.items || []).forEach(function(it) {
       if ((it.symbol||'').toLowerCase().includes(q)) {
-        results.push({section:'WATCHLIST · '+esc(wl.name), label: esc(it.symbol), sub: it.currentPrice ? fmtINR(it.currentPrice) : '', action: ()=>{ closeModal(); state.activeWatchlistId=wl.id; switchTab('watchlist'); }});
+        var wlid = wl.id, wlname = wl.name;
+        results.push({section:'WATCHLIST · ' + esc(wlname), label: esc(it.symbol), sub: it.currentPrice ? fmtINR(it.currentPrice) : '', tab:'watchlist', wlId: wlid});
       }
     });
   });
 
-  // Search priority
-  (state.priority || []).forEach(it => {
+  (state.priority || []).forEach(function(it) {
     if ((it.symbol||'').toLowerCase().includes(q)) {
-      results.push({section:'PRIORITY', label: esc(it.symbol), sub: it.setup ? esc(it.setup) : '', action: ()=>{ closeModal(); switchTab('priority'); }});
+      results.push({section:'PRIORITY', label: esc(it.symbol), sub: it.setup ? esc(it.setup) : '', tab:'priority'});
     }
   });
 
   if (!results.length) {
-    out.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted2);font-size:10px;letter-spacing:.1em">NO RESULTS FOR "'+esc(q.toUpperCase())+'"</div>';
+    out.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted2);font-size:10px;letter-spacing:.1em">NO RESULTS FOR "' + esc(q.toUpperCase()) + '"</div>';
     return;
   }
 
-  // Group by section
-  const grouped = {};
-  results.forEach(r => { if (!grouped[r.section]) grouped[r.section] = []; grouped[r.section].push(r); });
+  var grouped = {};
+  results.forEach(function(r) { if (!grouped[r.section]) grouped[r.section] = []; grouped[r.section].push(r); });
 
-  let html = '';
-  Object.entries(grouped).forEach(([sec, items]) => {
-    html += '<div style="font-size:8px;letter-spacing:.16em;color:var(--muted);font-weight:700;padding:8px 0 4px">'+esc(sec)+'</div>';
-    items.forEach((r, i) => {
-      html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 10px;background:var(--pbg);border:1px solid var(--border);border-radius:7px;margin-bottom:5px;cursor:pointer;transition:background .15s" onclick="('+r.action.toString()+')()" onmouseenter="this.style.background='var(--surf)'" onmouseleave="this.style.background='var(--pbg)'">'+
-        '<span style="font-size:12px;font-weight:700;color:var(--text)">'+r.label+'</span>'+
-        '<span style="font-size:9px;color:var(--muted)">'+r.sub+'</span>'+
+  var html = '';
+  Object.entries(grouped).forEach(function(entry) {
+    var sec = entry[0], items = entry[1];
+    html += '<div style="font-size:8px;letter-spacing:.16em;color:var(--muted);font-weight:700;padding:8px 0 4px">' + esc(sec) + '</div>';
+    items.forEach(function(r) {
+      var wlId = r.wlId || '';
+      html += '<div class="gs-result-row" style="display:flex;justify-content:space-between;align-items:center;padding:9px 10px;background:var(--pbg);border:1px solid var(--border);border-radius:7px;margin-bottom:5px;cursor:pointer" ' +
+        'onclick="closeModal();' + (wlId ? 'state.activeWatchlistId=\'' + wlId + '\';' : '') + 'switchTab(\'' + r.tab + '\')">' +
+        '<span style="font-size:12px;font-weight:700;color:var(--text)">' + r.label + '</span>' +
+        '<span style="font-size:9px;color:var(--muted)">' + r.sub + '</span>' +
       '</div>';
     });
   });
@@ -3527,45 +3523,47 @@ function runGlobalSearch() {
 
 // ── Watchlist → Priority ────────────────────────────────────────────────────
 function moveWatchToPriority(wlId, itemId) {
-  const wl = state.watchlists.find(w => w.id === wlId);
+  var wl = state.watchlists.find(function(w) { return w.id === wlId; });
   if (!wl) return;
-  const it = wl.items.find(x => x.id === itemId);
+  var it = wl.items.find(function(x) { return x.id === itemId; });
   if (!it) return;
   openPriorityModal(null);
-  setTimeout(() => {
-    const symEl = document.getElementById('mp-sym');
-    if (symEl) { symEl.value = it.symbol; symEl.focus(); }
+  var sym = it.symbol;
+  setTimeout(function() {
+    var symEl = document.getElementById('mp-sym');
+    if (symEl) { symEl.value = sym; symEl.focus(); }
   }, 60);
 }
 
 // ── Priority → Watchlist ────────────────────────────────────────────────────
 function movePriorityToWatchlist(id) {
-  const it = state.priority.find(x => x.id === id);
+  var it = state.priority.find(function(x) { return x.id === id; });
   if (!it) return;
+  var sym = it.symbol;
   if (state.watchlists.length === 1) {
-    _addSymToWatchlist(state.watchlists[0].id, it.symbol);
+    _addSymToWatchlist(state.watchlists[0].id, sym);
   } else {
-    const opts = state.watchlists.map(wl =>
-      '<button class="dock-popup-item" style="font-size:10px;padding:10px 14px" onclick="_addSymToWatchlist(''+wl.id+'',''+esc(it.symbol)+'');closeModal()">'+
-        esc(wl.name)+' <span style=\"color:var(--muted);font-size:8px\">('+wl.items.length+' symbols)</span></button>'
-    ).join('');
+    var opts = state.watchlists.map(function(wl) {
+      return '<button class="dock-popup-item" style="font-size:10px;padding:10px 14px" onclick="_addSymToWatchlist(\'' + wl.id + '\',\'' + esc(sym) + '\');closeModal()">' +
+        esc(wl.name) + ' <span style="color:var(--muted);font-size:8px">(' + wl.items.length + ' symbols)</span></button>';
+    }).join('');
     showModal(
-      '<div class="modal-title" style="color:var(--watch)">ADD TO WATCHLIST</div>'+
-      '<div style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:11px">SELECT A WATCHLIST FOR <strong>'+esc(it.symbol)+'</strong></div>'+
-      opts+
+      '<div class="modal-title" style="color:var(--watch)">ADD TO WATCHLIST</div>' +
+      '<div style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:11px">SELECT A WATCHLIST FOR <strong>' + esc(sym) + '</strong></div>' +
+      opts +
       '<div class="modal-actions"><button class="btn-act btn-cancel" onclick="closeModal()">CANCEL</button></div>'
     );
   }
 }
 
 function _addSymToWatchlist(wlId, symbol) {
-  const wl = state.watchlists.find(w => w.id === wlId);
+  var wl = state.watchlists.find(function(w) { return w.id === wlId; });
   if (!wl) return;
-  if (wl.items.some(x => x.symbol === symbol)) {
+  if (wl.items.some(function(x) { return x.symbol === symbol; })) {
     showToast(symbol + ' already in watchlist', 'info'); return;
   }
   wl.items.push({
-    id: uid(), symbol, currentPrice: '',
+    id: uid(), symbol: symbol, currentPrice: '',
     gtt: { buy:{price:'',slPrice:'',slPct:''}, sell:{price:'',slPrice:'',slPct:''} },
     addedAt: new Date().toISOString()
   });
