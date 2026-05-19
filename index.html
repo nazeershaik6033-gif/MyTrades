@@ -450,6 +450,60 @@ textarea{resize:vertical}
 .dock-popup-item:last-child{border-bottom:none}
 .dock-popup-item:hover{background:var(--surf)}
 .dock-popup-item .pi-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── Analytics Tab ─────────────────────────────────────────────────────── */
+.analytics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(min-width:600px){.analytics-grid{grid-template-columns:repeat(4,1fr)}}
+.analytics-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.analytics-card .ac-lbl{font-size:8px;color:var(--muted);letter-spacing:.14em;margin-bottom:6px}
+.analytics-card .ac-val{font-size:18px;font-weight:700}
+.analytics-card .ac-sub{font-size:9px;color:var(--muted2);margin-top:3px}
+.analytics-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
+.analytics-section h4{font-size:9px;letter-spacing:.14em;color:var(--muted);margin-bottom:12px;font-weight:700}
+.monthly-table{width:100%;border-collapse:collapse;font-size:9px}
+.monthly-table th{color:var(--muted);font-weight:600;letter-spacing:.1em;padding:5px 8px;border-bottom:1px solid var(--border);text-align:left}
+.monthly-table td{padding:6px 8px;border-bottom:1px solid var(--border)}
+.monthly-table tr:last-child td{border-bottom:none}
+.monthly-table .pos{color:var(--live);font-weight:700}
+.monthly-table .neg{color:var(--danger);font-weight:700}
+.equity-wrap{width:100%;overflow-x:auto}
+#equity-canvas{display:block;width:100%;min-height:180px}
+.cat-stat-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:9px}
+.cat-stat-row:last-child{border-bottom:none}
+.cat-stat-badge{font-size:7px;padding:2px 7px;border-radius:8px;letter-spacing:.08em;font-weight:700}
+
+/* ── Search Panel ──────────────────────────────────────────────────────── */
+.search-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:flex-start;justify-content:center;padding-top:60px}
+.search-overlay.open{display:flex}
+.search-box{background:var(--card);border:1px solid var(--border2);border-radius:14px;width:min(96vw,540px);max-height:80vh;display:flex;flex-direction:column;overflow:hidden}
+.search-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.search-input{flex:1;background:var(--ibg);border:1px solid var(--border2);border-radius:8px;padding:9px 13px;font-family:'Geist Mono',monospace;font-size:12px;color:var(--text);outline:none}
+.search-input:focus{border-color:var(--bc)}
+.search-close{background:transparent;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px 8px;border-radius:6px}
+.search-close:hover{background:var(--surf)}
+.search-results{overflow-y:auto;padding:10px}
+.search-result-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:9px;cursor:pointer;border:1px solid transparent;margin-bottom:6px}
+.search-result-item:hover{background:var(--surf);border-color:var(--border)}
+.sri-sym{font-size:12px;font-weight:700;letter-spacing:.06em}
+.sri-meta{font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:.06em}
+.sri-pl{font-size:11px;font-weight:700;text-align:right}
+.sri-pl-pct{font-size:8px;color:var(--muted);margin-top:2px}
+.search-empty{text-align:center;padding:32px;color:var(--muted2);font-size:10px;letter-spacing:.12em}
+.btn-search{background:var(--pbg);border:1px solid var(--border2);color:var(--muted);border-radius:6px;font-size:9px;padding:6px 10px;letter-spacing:.08em}
+.btn-search:hover{border-color:var(--bc);color:var(--bc)}
+
+/* ── Tags ──────────────────────────────────────────────────────────────── */
+.tag-chip{display:inline-flex;align-items:center;gap:4px;font-size:8px;padding:2px 8px;border-radius:10px;background:rgba(167,139,250,.12);color:#a78bfa;border:1px solid rgba(167,139,250,.3);letter-spacing:.06em;font-weight:600;margin:2px 2px 0 0}
+.tag-chip .tag-x{cursor:pointer;opacity:.7;font-size:10px;line-height:1}
+.tag-chip .tag-x:hover{opacity:1}
+.tags-row{display:flex;flex-wrap:wrap;gap:2px;margin-top:6px}
+.tag-input-wrap{display:flex;gap:6px;align-items:center;margin-top:6px}
+.tag-input{flex:1;background:var(--ibg);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;font-family:'Geist Mono',monospace;font-size:10px;color:var(--text);outline:none}
+.tag-input:focus{border-color:#a78bfa}
+.btn-add-tag{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:#a78bfa;border-radius:6px;font-size:9px;padding:6px 10px;font-weight:700;letter-spacing:.06em}
+.tag-filter-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;align-items:center}
+.tag-filter-chip{font-size:8px;padding:3px 10px;border-radius:10px;background:var(--surf);color:var(--muted);border:1px solid var(--border2);cursor:pointer;letter-spacing:.06em;font-weight:600}
+.tag-filter-chip.active{background:rgba(167,139,250,.15);color:#a78bfa;border-color:rgba(167,139,250,.4)}
 </style>
 </head>
 <body>
@@ -479,6 +533,7 @@ textarea{resize:vertical}
   <button class="main-tab" data-tab="watchlist" style="--accent-c:var(--watch);--dot-c:var(--watch)" onclick="switchTab('watchlist')"><span class="tab-dot"></span>WATCHLIST</button>
   <button class="main-tab" data-tab="calendar"  style="--accent-c:var(--cal);--dot-c:var(--cal)" onclick="switchTab('calendar')"><span class="tab-dot"></span>CALENDAR</button>
   <button class="main-tab" data-tab="strategy"  style="--accent-c:var(--strat);--dot-c:var(--strat)" onclick="switchTab('strategy')"><span class="tab-dot"></span>STRATEGY</button>
+  <button class="main-tab" data-tab="analytics" style="--accent-c:#a78bfa;--dot-c:#a78bfa" onclick="switchTab('analytics')"><span class="tab-dot"></span>ANALYTICS</button>
   <button class="main-tab" data-tab="settings"  style="--accent-c:var(--sett);--dot-c:var(--sett)" onclick="switchTab('settings')"><span class="tab-dot"></span>SETTINGS</button>
 </div>
 
@@ -1076,6 +1131,16 @@ textarea{resize:vertical}
         <div class="settings-sub">Personal trading record kept entirely on your device. Nothing is sent to any server.</div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="section" id="section-analytics">
+  <div class="layout">
+    <div class="section-header"><div>
+      <div class="section-title" style="color:#a78bfa">◆ ANALYTICS</div>
+      <div class="section-title-sub">Performance · Stats · Equity Curve</div>
+    </div></div>
+    <div id="analytics-content"></div>
   </div>
 </div>
 
@@ -2024,6 +2089,7 @@ function renderTab() {
     case 'calendar':   renderCalendar(); break;
     case 'strategy':   renderStrategy(); break;
     case 'accounts':   renderAccounts(); break;
+    case 'analytics':  renderAnalytics(); break;
     case 'settings':   updateStorageBar(); applyFontSettings(); _syncFontSelects(); initLivePriceSettings(); break;
   }
   updateCounts();
@@ -2206,7 +2272,18 @@ function renderTrades() {
       container.innerHTML = '<div class="empty-state"><div class="empty-icon">⚡</div><div class="empty-text">NO ACTIVE TRADES</div><div class="empty-sub">Click + ADD TRADE to start tracking satellite positions.</div></div>';
       return;
     }
-    trades.forEach((trade, idx) => {
+    const filterBar = document.createElement('div');
+    filterBar.innerHTML = tagFilterBarHtml();
+    container.appendChild(filterBar);
+    const filteredTrades = activeTagFilter ? trades.filter(t => (t.tags||[]).includes(activeTagFilter)) : trades;
+    if (!filteredTrades.length) {
+      const emp = document.createElement('div');
+      emp.className = 'empty-state';
+      emp.innerHTML = '<div class="empty-icon">🏷</div><div class="empty-text">NO TRADES WITH TAG "'+esc(activeTagFilter)+'"</div>';
+      container.appendChild(emp);
+      return;
+    }
+    filteredTrades.forEach((trade, idx) => {
       const card = editingIds.has(trade.id) ? buildEditCard(trade, idx, 'live') : buildSatelliteHoldingCard(trade, idx);
       container.appendChild(card);
     });
@@ -2225,7 +2302,18 @@ function renderTrades() {
     container.innerHTML = '<div class="empty-state"><div class="empty-icon">📉</div><div class="empty-text">NO CLOSED TRADES YET</div><div class="empty-sub">Close a live trade to see it here.</div></div>';
     return;
   }
-  [...closedTrades].reverse().forEach((trade, idx) => {
+  const closedFilterBar = document.createElement('div');
+  closedFilterBar.innerHTML = tagFilterBarHtml();
+  container.appendChild(closedFilterBar);
+  const filteredClosed = activeTagFilter ? [...closedTrades].filter(t => (t.tags||[]).includes(activeTagFilter)) : [...closedTrades];
+  if (!filteredClosed.length) {
+    const emp = document.createElement('div');
+    emp.className = 'empty-state';
+    emp.innerHTML = '<div class="empty-icon">🏷</div><div class="empty-text">NO TRADES WITH TAG "'+esc(activeTagFilter)+'"</div>';
+    container.appendChild(emp);
+    return;
+  }
+  filteredClosed.reverse().forEach((trade, idx) => {
     const card = editingIds.has(trade.id) ? buildEditCard(trade, idx, 'closed') : buildSatelliteClosedCard(trade, idx);
     container.appendChild(card);
   });
@@ -2267,6 +2355,11 @@ function buildSatelliteHoldingCard(trade, idx) {
           '<div class="holding-cell"><span class="cell-lbl">P&L</span><span class="cell-val" style="color:'+plColor+'">'+fmtPL(pl)+' <span style="font-size:9px;opacity:.75">('+fmtPct(plPct)+')</span></span></div>'+
         '</div>'+
         (trade.before.description?'<div style="margin-top:8px;font-size:9px;color:var(--muted);line-height:1.5">'+esc(trade.before.description)+'</div>':'')+
+        tradeTagsHtml(trade)+
+        '<div class="tag-input-wrap" style="margin-top:6px">'+
+          '<input class="tag-input" id="taginp-'+trade.id+'" placeholder="add tag..." onkeydown="if(event.key===\'Enter\')addTagToTrade(\''+trade.id+'\',\'taginp-'+trade.id+'\')">'+
+          '<button class="btn-add-tag" onclick="addTagToTrade(\''+trade.id+'\',\'taginp-'+trade.id+'\')">+ TAG</button>'+
+        '</div>'+
       '</div>'+
     '</div>';
   return div;
@@ -2297,6 +2390,11 @@ function buildSatelliteClosedCard(trade, idx) {
         '<div class="holding-cell"><span class="cell-lbl">Entry Price</span><span class="cell-val">'+fmtINR(trade.before.price)+'</span></div>'+
         '<div class="holding-cell"><span class="cell-lbl">Exit Price</span><span class="cell-val">'+fmtINR(trade.after.price)+'</span></div>'+
         '<div class="holding-cell"><span class="cell-lbl">Realized P&L</span><span class="cell-val" style="color:'+plColor+'">'+fmtPL(pl)+'</span></div>'+
+      '</div>'+
+      tradeTagsHtml(trade)+
+      '<div class="tag-input-wrap" style="margin-top:6px">'+
+        '<input class="tag-input" id="taginp-'+trade.id+'" placeholder="add tag..." onkeydown="if(event.key===\'Enter\')addTagToTrade(\''+trade.id+'\',\'taginp-'+trade.id+'\')">'+
+        '<button class="btn-add-tag" onclick="addTagToTrade(\''+trade.id+'\',\'taginp-'+trade.id+'\')">+ TAG</button>'+
       '</div>'+
     '</div>';
   return div;
@@ -2342,6 +2440,13 @@ function buildSummaryCard(trade, idx, tab) {
       '<div class="summary-grid">'+
         buildSummaryPanel(trade, 'before')+
         buildSummaryPanel(trade, 'after')+
+      '</div>'+
+      '<div style="padding:10px 0 4px">'+
+        tradeTagsHtml(trade)+
+        '<div class="tag-input-wrap" style="margin-top:6px">'+
+          '<input class="tag-input" id="taginp-'+trade.id+'" placeholder="add tag..." onkeydown="if(event.key===\'Enter\')addTagToTrade(\''+trade.id+'\',\'taginp-'+trade.id+'\')">'+
+          '<button class="btn-add-tag" onclick="addTagToTrade(\''+trade.id+'\',\'taginp-'+trade.id+'\')">+ TAG</button>'+
+        '</div>'+
       '</div>'+
     '</div>';
   return card;
@@ -3151,6 +3256,13 @@ function parseTradebook(input) {
       const cPrc = col('Price');
       const cTid = col('Trade ID');
 
+      const missing = [['Symbol',cSym],['Trade Date',cDt],['Segment',cSeg],['Trade Type',cTyp],['Quantity',cQty],['Price',cPrc]]
+        .filter(([,idx]) => idx < 0).map(([name]) => name);
+      if (missing.length) {
+        showToast('Missing columns: ' + missing.join(', ') + ' — check file format', 'warning');
+        input.value = ''; return;
+      }
+
       // Already-imported trade IDs
       if (!state.importedTradeIds) state.importedTradeIds = [];
       const existingTids = new Set(state.importedTradeIds);
@@ -3469,13 +3581,21 @@ function runGlobalSearch() {
   const allCats = ['stocks','futures','options'];
   allCats.forEach(cat => {
     (state.trades.closed[cat] || []).forEach(t => {
-      if ((t.symbol||'').toLowerCase().includes(q)) {
-        results.push({section:'TRADES (CLOSED)', label: esc(t.symbol), sub: esc(cat.toUpperCase()) + (t.after?.pl!=null?' · '+fmtPL(t.after.pl):''), action: ()=>{ closeModal(); switchTab('entry'); setTimeout(()=>{ activeSatelliteTab='closed'; renderTab(); },80); }});
+      const sym = t.before?.symbol || t.after?.symbol || '';
+      const tagMatch = (t.tags||[]).some(tag => tag.toLowerCase().includes(q));
+      if (sym.toLowerCase().includes(q) || tagMatch) {
+        const pl = t.after?.pl != null ? num(t.after.pl) : null;
+        const plStr = pl != null ? ' · ' + fmtPL(pl) : '';
+        const tagStr = tagMatch ? ' 🏷 ' + (t.tags||[]).filter(tag=>tag.toLowerCase().includes(q)).join(', ') : '';
+        results.push({section:'TRADES (CLOSED)', label: esc(sym||'—'), sub: esc(cat.toUpperCase()) + plStr + tagStr, action: ()=>{ closeModal(); switchTab('live'); setTimeout(()=>{ activeSatelliteTab='closed'; renderTab(); },80); }});
       }
     });
     (state.trades.live[cat] || []).forEach(t => {
-      if ((t.symbol||'').toLowerCase().includes(q)) {
-        results.push({section:'TRADES (LIVE)', label: esc(t.symbol), sub: esc(cat.toUpperCase()), action: ()=>{ closeModal(); switchTab('entry'); }});
+      const sym = t.before?.symbol || '';
+      const tagMatch = (t.tags||[]).some(tag => tag.toLowerCase().includes(q));
+      if (sym.toLowerCase().includes(q) || tagMatch) {
+        const tagStr = tagMatch ? ' 🏷 ' + (t.tags||[]).filter(tag=>tag.toLowerCase().includes(q)).join(', ') : '';
+        results.push({section:'TRADES (LIVE)', label: esc(sym||'—'), sub: esc(cat.toUpperCase()) + tagStr, action: ()=>{ closeModal(); switchTab('live'); }});
       }
     });
   });
@@ -4130,14 +4250,14 @@ function renderHoldings() {
         '<span style="font-size:10px;color:var(--muted);letter-spacing:.1em">TOTAL P&L</span>'+
         '<div style="display:flex;align-items:center;gap:8px">'+
           '<span style="font-size:16px;font-weight:700;color:'+plCol+'">'+(totPL>=0?'+':'')+fmtINR(totPL)+'</span>'+
-          '<span style="font-size:10px;padding:3px 9px;border-radius:10px;background:'+plCol+'22;color:'+plCol+';font-weight:700">'+(totPLPct>=0?'+':'')+totPLPct.toFixed(2)+'%</span>'+
+          '<span style="font-size:10px;padding:3px 9px;border-radius:10px;background:'+plCol+'22;color:'+plCol+';font-weight:700">'+fmtPct(totPLPct)+'</span>'+
         '</div>'+
       '</div>'+
       '<div style="border-top:1px solid var(--border);padding-top:10px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">'+
         '<span style="font-size:9px;color:var(--muted);letter-spacing:.1em">TODAY\'S P&L</span>'+
         '<div style="display:flex;align-items:center;gap:8px">'+
           '<span style="font-size:13px;font-weight:700;color:'+dayCol+'">'+(totDay>=0?'+':'')+fmtINR(totDay)+'</span>'+
-          '<span style="font-size:9px;padding:2px 7px;border-radius:8px;background:'+dayCol+'22;color:'+dayCol+';font-weight:700">'+(totDayPct>=0?'+':'')+totDayPct.toFixed(2)+'%</span>'+
+          '<span style="font-size:9px;padding:2px 7px;border-radius:8px;background:'+dayCol+'22;color:'+dayCol+';font-weight:700">'+fmtPct(totDayPct)+'</span>'+
         '</div>'+
       '</div>'+
       '<div style="font-size:8px;color:var(--muted2);margin-top:8px;letter-spacing:.06em">'+items.length+' holdings · '+items.filter(i=>i.type==='core').length+' core · '+items.filter(i=>i.type==='satellite').length+' satellite</div>'+
@@ -4203,7 +4323,7 @@ function renderHoldings() {
           '</div>'+
           '<div style="text-align:right">'+
             '<div style="font-size:14px;font-weight:700;color:'+plCol+'">'+(item.pl>=0?'+':'')+fmtINR(item.pl)+'</div>'+
-            '<div style="font-size:9px;color:'+plCol+'">'+(item.plPct>=0?'+':'')+item.plPct.toFixed(2)+'%</div>'+
+            '<div style="font-size:9px;color:'+plCol+'">'+fmtPct(item.plPct)+'</div>'+
             '<div style="font-size:8px;color:var(--muted2);margin-top:2px;letter-spacing:.06em">TAP FOR CHART ▼</div>'+
           '</div>'+
         '</div>'+
@@ -4212,7 +4332,7 @@ function renderHoldings() {
           '<div><div style="font-size:7.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:2px">LTP</div><div style="font-size:10px;font-weight:700">'+fmtINR(item.ltp)+'</div></div>'+
           '<div><div style="font-size:7.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:2px">CURRENT</div><div style="font-size:10px;font-weight:700">'+fmtINR(item.ltp*item.qty)+'</div></div>'+
           '<div><div style="font-size:7.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:2px">DAY P&L</div>'+
-            '<div style="font-size:10px;font-weight:700;color:'+dayCol+'">'+(item.dayPl>=0?'+':'')+fmtINR(item.dayPl)+'<span style="font-size:8px;margin-left:2px">('+( item.dayPct>=0?'+':'')+item.dayPct.toFixed(1)+'%)</span></div></div>'+
+            '<div style="font-size:10px;font-weight:700;color:'+dayCol+'">'+(item.dayPl>=0?'+':'')+fmtINR(item.dayPl)+'<span style="font-size:8px;margin-left:2px">('+fmtPct(item.dayPct)+')</span></div></div>'+
         '</div>'+
       '</div>'+
       '<div style="display:flex;gap:6px;flex-wrap:wrap" onclick="event.stopPropagation()">'+
@@ -5890,7 +6010,8 @@ function flattenTradesForExport() {
           'Realized P&L (₹)': after.pl           || '',
           'Exit Description':  after.description  || '',
           'Created At':        t.createdAt        || '',
-          'Closed At':         t.closedAt         || ''
+          'Closed At':         t.closedAt         || '',
+          'Tags':              (t.tags||[]).join(', ')
         });
       });
     });
@@ -6072,6 +6193,235 @@ function exportCSV() {
   } catch(e) {
     showToast('CSV export failed: ' + e.message, 'error');
   }
+}
+
+// ── Analytics ────────────────────────────────────────────────────────────────
+function renderAnalytics() {
+  const el = document.getElementById('analytics-content');
+  if (!el) return;
+
+  const allCats = ['stocks','futures','options'];
+  const closed = [];
+  allCats.forEach(cat => (state.trades.closed[cat] || []).forEach(t => closed.push({...t, cat})));
+  closed.sort((a,b) => new Date(a.closedAt||0) - new Date(b.closedAt||0));
+
+  const pls = closed.map(t => num(t.after?.pl));
+  const wins = pls.filter(p => p > 0).length;
+  const losses = pls.filter(p => p < 0).length;
+  const totalPL = pls.reduce((s,p) => s+p, 0);
+  const avgPL = pls.length ? totalPL / pls.length : 0;
+  const winRate = pls.length ? (wins / pls.length) * 100 : 0;
+  const bestPL = pls.length ? Math.max(...pls) : 0;
+  const worstPL = pls.length ? Math.min(...pls) : 0;
+  const bestTrade = closed.find(t => num(t.after?.pl) === bestPL);
+  const worstTrade = closed.find(t => num(t.after?.pl) === worstPL);
+
+  // Monthly breakdown
+  const monthly = {};
+  closed.forEach(t => {
+    const d = new Date(t.closedAt || t.after?.datetime || 0);
+    const key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+    if (!monthly[key]) monthly[key] = { pl:0, wins:0, losses:0, trades:0 };
+    const pl = num(t.after?.pl);
+    monthly[key].pl += pl;
+    monthly[key].trades++;
+    if (pl > 0) monthly[key].wins++; else if (pl < 0) monthly[key].losses++;
+  });
+  const monthKeys = Object.keys(monthly).sort().reverse().slice(0,12);
+
+  // Category stats
+  const catStats = {};
+  allCats.forEach(cat => {
+    const ct = (state.trades.closed[cat] || []);
+    const cp = ct.map(t => num(t.after?.pl));
+    catStats[cat] = { trades: ct.length, pl: cp.reduce((s,p)=>s+p,0), wins: cp.filter(p=>p>0).length };
+  });
+
+  // Equity curve data
+  let cumPL = 0;
+  const curve = closed.map(t => { cumPL += num(t.after?.pl); return cumPL; });
+
+  const plColor = v => v >= 0 ? 'var(--live)' : 'var(--danger)';
+
+  el.innerHTML =
+    '<div class="analytics-grid">'+
+      '<div class="analytics-card"><div class="ac-lbl">TOTAL TRADES</div><div class="ac-val">'+closed.length+'</div><div class="ac-sub">'+(state.trades.live.stocks.length+state.trades.live.futures.length+state.trades.live.options.length)+' open</div></div>'+
+      '<div class="analytics-card"><div class="ac-lbl">WIN RATE</div><div class="ac-val" style="color:'+plColor(winRate-50)+'">'+fmtPct(winRate)+'</div><div class="ac-sub">'+wins+'W / '+losses+'L</div></div>'+
+      '<div class="analytics-card"><div class="ac-lbl">TOTAL P&L</div><div class="ac-val" style="color:'+plColor(totalPL)+'">'+(totalPL>=0?'+':'')+fmtINR(totalPL)+'</div><div class="ac-sub">avg '+fmtINR(avgPL)+'/trade</div></div>'+
+      '<div class="analytics-card"><div class="ac-lbl">BEST TRADE</div><div class="ac-val" style="color:var(--live)">'+fmtINR(bestPL)+'</div><div class="ac-sub">'+(bestTrade?esc(bestTrade.before?.symbol||'—'):'—')+'</div></div>'+
+    '</div>'+
+
+    '<div class="analytics-section">'+
+      '<h4>WORST TRADE</h4>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px">'+
+        '<span style="font-weight:700">'+(worstTrade?esc(worstTrade.before?.symbol||'—'):'—')+'</span>'+
+        '<span style="color:var(--danger);font-weight:700">'+(worstPL<=0?'':'')+fmtINR(worstPL)+'</span>'+
+      '</div>'+
+    '</div>'+
+
+    '<div class="analytics-section">'+
+      '<h4>EQUITY CURVE</h4>'+
+      (curve.length < 2
+        ? '<div style="text-align:center;padding:24px;color:var(--muted2);font-size:9px;letter-spacing:.1em">NEED 2+ CLOSED TRADES</div>'
+        : '<div class="equity-wrap"><canvas id="equity-canvas" height="180"></canvas></div>')+
+    '</div>'+
+
+    '<div class="analytics-section">'+
+      '<h4>CATEGORY BREAKDOWN</h4>'+
+      allCats.map(cat => {
+        const s = catStats[cat];
+        if (!s.trades) return '';
+        const wr = s.trades ? Math.round((s.wins/s.trades)*100) : 0;
+        return '<div class="cat-stat-row">'+
+          '<div><span style="font-weight:700;letter-spacing:.06em">'+cat.toUpperCase()+'</span> <span style="font-size:8px;color:var(--muted)">· '+s.trades+' trades</span></div>'+
+          '<div style="display:flex;gap:10px;align-items:center">'+
+            '<span class="cat-stat-badge" style="background:rgba(167,139,250,.1);color:#a78bfa;border:1px solid rgba(167,139,250,.25)">'+wr+'% WIN</span>'+
+            '<span style="font-weight:700;color:'+plColor(s.pl)+'">'+(s.pl>=0?'+':'')+fmtINR(s.pl)+'</span>'+
+          '</div>'+
+        '</div>';
+      }).join('')+
+    '</div>'+
+
+    '<div class="analytics-section">'+
+      '<h4>MONTHLY P&L (LAST 12 MONTHS)</h4>'+
+      (monthKeys.length === 0
+        ? '<div style="text-align:center;padding:16px;color:var(--muted2);font-size:9px;letter-spacing:.1em">NO DATA</div>'
+        : '<table class="monthly-table"><thead><tr><th>MONTH</th><th>TRADES</th><th>W/L</th><th>P&L</th></tr></thead><tbody>'+
+          monthKeys.map(k => {
+            const m = monthly[k];
+            const [yr,mo] = k.split('-');
+            const label = new Date(yr, mo-1, 1).toLocaleString('en-IN',{month:'short',year:'numeric'});
+            return '<tr><td>'+label+'</td><td>'+m.trades+'</td><td style="color:var(--muted)">'+m.wins+'W '+m.losses+'L</td><td class="'+(m.pl>=0?'pos':'neg')+'">'+(m.pl>=0?'+':'')+fmtINR(m.pl)+'</td></tr>';
+          }).join('')+
+          '</tbody></table>'+
+      '')+
+    '</div>';
+
+  // Draw equity curve canvas
+  if (curve.length >= 2) {
+    setTimeout(() => {
+      const canvas = document.getElementById('equity-canvas');
+      if (!canvas) return;
+      const W = canvas.offsetWidth || 400;
+      const H = 180;
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      const pad = { t:16, r:16, b:28, l:56 };
+      const cw = W - pad.l - pad.r, ch = H - pad.t - pad.b;
+      const mn = Math.min(0, ...curve), mx = Math.max(0, ...curve);
+      const range = mx - mn || 1;
+      const toX = i => pad.l + (i / (curve.length-1)) * cw;
+      const toY = v => pad.t + ch - ((v - mn) / range) * ch;
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const gridColor = isDark ? '#2a2a2a' : '#e8ecf8';
+      const zeroColor = isDark ? '#383838' : '#c0c8e0';
+      const textColor = isDark ? '#6e6a65' : '#6878b0';
+
+      ctx.clearRect(0,0,W,H);
+
+      // grid lines
+      [0,0.25,0.5,0.75,1].forEach(t => {
+        const y = pad.t + ch * t;
+        ctx.strokeStyle = gridColor; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l+cw, y); ctx.stroke();
+        const val = mn + (1-t)*range;
+        ctx.fillStyle = textColor; ctx.font = '9px monospace'; ctx.textAlign = 'right';
+        ctx.fillText((val>=0?'+':'')+fmtINR(val), pad.l-4, y+3);
+      });
+
+      // zero line
+      if (mn < 0 && mx > 0) {
+        const zy = toY(0);
+        ctx.strokeStyle = zeroColor; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
+        ctx.beginPath(); ctx.moveTo(pad.l,zy); ctx.lineTo(pad.l+cw,zy); ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // fill area
+      const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t+ch);
+      const lastVal = curve[curve.length-1];
+      if (lastVal >= 0) { grad.addColorStop(0,'rgba(16,185,129,.25)'); grad.addColorStop(1,'rgba(16,185,129,.02)'); }
+      else { grad.addColorStop(0,'rgba(220,38,38,.02)'); grad.addColorStop(1,'rgba(220,38,38,.25)'); }
+      ctx.beginPath(); ctx.moveTo(toX(0), toY(curve[0]));
+      curve.forEach((v,i) => { if(i>0) ctx.lineTo(toX(i), toY(v)); });
+      ctx.lineTo(toX(curve.length-1), pad.t+ch);
+      ctx.lineTo(toX(0), pad.t+ch); ctx.closePath();
+      ctx.fillStyle = grad; ctx.fill();
+
+      // line
+      ctx.beginPath(); ctx.moveTo(toX(0), toY(curve[0]));
+      curve.forEach((v,i) => { if(i>0) ctx.lineTo(toX(i), toY(v)); });
+      ctx.strokeStyle = lastVal >= 0 ? '#10b981' : '#dc2626';
+      ctx.lineWidth = 2; ctx.stroke();
+
+      // dots at first/last
+      [[0,curve[0]],[curve.length-1,curve[curve.length-1]]].forEach(([i,v]) => {
+        ctx.beginPath(); ctx.arc(toX(i), toY(v), 4, 0, Math.PI*2);
+        ctx.fillStyle = v >= 0 ? '#10b981' : '#dc2626'; ctx.fill();
+      });
+    }, 50);
+  }
+}
+
+// ── Tags ──────────────────────────────────────────────────────────────────────
+let activeTagFilter = null;
+
+function getAllTags() {
+  const tags = new Set();
+  ['live','closed'].forEach(tab => ['stocks','futures','options'].forEach(cat => {
+    (state.trades[tab]?.[cat] || []).forEach(t => (t.tags||[]).forEach(tag => tags.add(tag)));
+  }));
+  return [...tags].sort();
+}
+
+function renderTagChips(tradeId, containerId) {
+  const trade = findTrade(tradeId);
+  if (!trade) return;
+  const wrap = document.getElementById(containerId);
+  if (!wrap) return;
+  wrap.innerHTML = (trade.tags||[]).map(tag =>
+    '<span class="tag-chip">'+esc(tag)+'<span class="tag-x" onclick="removeTag(\''+tradeId+'\',\''+esc(tag)+'\')">×</span></span>'
+  ).join('');
+}
+
+function addTagToTrade(tradeId, inputId) {
+  const inp = document.getElementById(inputId);
+  if (!inp) return;
+  const tag = inp.value.trim().toLowerCase().replace(/\s+/g,'-');
+  if (!tag) return;
+  const trade = findTrade(tradeId);
+  if (!trade) return;
+  if (!trade.tags) trade.tags = [];
+  if (!trade.tags.includes(tag)) { trade.tags.push(tag); saveState(); }
+  inp.value = '';
+  renderTagChips(tradeId, 'tags-'+tradeId);
+}
+
+function removeTag(tradeId, tag) {
+  const trade = findTrade(tradeId);
+  if (!trade || !trade.tags) return;
+  trade.tags = trade.tags.filter(t => t !== tag);
+  saveState();
+  renderTagChips(tradeId, 'tags-'+tradeId);
+}
+
+function setTagFilter(tag) {
+  activeTagFilter = activeTagFilter === tag ? null : tag;
+  renderTab();
+}
+
+function tagFilterBarHtml() {
+  const tags = getAllTags();
+  if (!tags.length) return '';
+  return '<div class="tag-filter-row"><span style="font-size:8px;color:var(--muted);letter-spacing:.1em;margin-right:2px">FILTER:</span>'+
+    tags.map(t => '<button class="tag-filter-chip'+(activeTagFilter===t?' active':'')+'" onclick="setTagFilter(\''+esc(t)+'\')">'+esc(t)+'</button>').join('')+
+    (activeTagFilter?'<button class="tag-filter-chip" onclick="setTagFilter(null)" style="color:var(--danger);border-color:var(--danger)">✕ CLEAR</button>':'')+
+  '</div>';
+}
+
+function tradeTagsHtml(trade) {
+  if (!trade.tags || !trade.tags.length) return '';
+  return '<div class="tags-row">'+trade.tags.map(t => '<span class="tag-chip">'+esc(t)+'</span>').join('')+'</div>';
 }
 
 function downloadTradePDF(id) {
